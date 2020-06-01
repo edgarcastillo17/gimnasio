@@ -1,45 +1,107 @@
 ﻿<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+<html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Day Bootstrap Template - Index</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Theme/icofont.min.css" rel="stylesheet">
+    <link href="~/Content/Theme/boxicons.css" rel="stylesheet">
+    <link href="~/Content/Theme/venobox.css" rel="stylesheet">
+    <link href="~/Content/Theme/owl.carousel.css" rel="stylesheet">
+    <link href="~/Content/Theme/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/Content/Theme/style.css" rel="stylesheet">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <!-- =======================================================
+    * Template Name: Day - v2.0.0
+    * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top bg-dark">
+        <div class="container d-flex">
+            <div class="contact-info mr-auto">
+                <i class="icofont-envelope"></i> <a href="#">unmir@mail.com</a>
+                <i class="icofont-phone"></i> +52 664 331 2592
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+            <div class="social-links">
+                <a href="https://twitter.com/" target="_blank" class="twitter"><i class="icofont-twitter"></i></a>
+                <a href="https://www.facebook.com/" target="_blank" class="facebook"><i class="icofont-facebook"></i></a>
+                <a href="https://www.instagram.com/" target="_blank" class="instagram"><i class="icofont-instagram"></i></a>
+                <a href="https://www.skype.com/es/" target="_blank" class="skype"><i class="icofont-skype"></i></a>
+                <a href="https://mx.linkedin.com/" target="_blank" class="linkedin"><i class="icofont-linkedin"></i></a>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top bg-dark">
+        <div class="container d-flex align-items-center">
+
+            <h1 class="logo mr-auto"><a href="@Url.Action("Index","Home")">Unmir</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav class="nav-menu d-none d-lg-block bg-dark">
+                <ul>
+                    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li><a href="#about">Acerca</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#pricing">Precios</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="@Url.Action("Login","Account")">Ingresar</a></li>
+                </ul>
+            </nav><!-- .nav-menu -->
+        </div>
+    </header><!-- End Header -->
+
+    <div>
+            @RenderBody()
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                &copy; <strong><span>Castillo Medina</span></strong> y <strong><span>Villegas Ramírez</span></strong> 2020
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="~/Scripts/Theme/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/Theme/jquery.easing.min.js"></script>
+    <script src="~/Scripts/Theme/validate.js"></script>
+    <script src="~/Scripts/Theme/isotope.pkgd.min.js"></script>
+    <script src="~/Scripts/Theme/venobox.min.js"></script>
+    <script src="~/Scripts/Theme/owl.carousel.min.js"></script>
+    <script src="~/Scripts/Theme/aos.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/Scripts/Theme/main.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
+
 </html>
