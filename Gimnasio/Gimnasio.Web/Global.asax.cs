@@ -1,3 +1,4 @@
+using Gimnasio.Web.Class;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,14 @@ namespace Gimnasio.Web
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            this.CheckRoles();
+            Utilities.CheckManager();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        private void CheckRoles()
+        {
+            Utilities.CheckRoles("Admin");
         }
     }
 }

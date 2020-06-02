@@ -59,15 +59,44 @@
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-            <nav class="nav-menu d-none d-lg-block bg-dark">
-                <ul>
-                    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
-                    <li><a href="#about">Acerca</a></li>
-                    <li><a href="#services">Servicios</a></li>
-                    <li><a href="#pricing">Precios</a></li>
-                    <li><a href="#contact">Contacto</a></li>
-                    <li><a href="@Url.Action("Login","Account")">Ingresar</a></li>
-                </ul>
+            <nav class="navbar navbar-expand-lg bg-dark">
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Inicio
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Index","Home")">Inicio</a>
+                                <a class="dropdown-item" href="#about">Acerca</a>
+                                <a class="dropdown-item" href="#services">Servicios</a>
+                                <a class="dropdown-item" href="#pricing">Precios</a>
+                                <a class="dropdown-item" href="#contact">Contacto</a>
+                            </div>
+                        </li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Users")">Usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Machines")">Máquinas</a></li>
+                        }
+
+                        @if (User.IsInRole("Nutritionist") || User.IsInRole("Coach"))
+                        {
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Clients")">Clientes</a></li>
+                        }
+
+                        @if (User.IsInRole("Client"))
+                        {
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Nutritionists")">Nutriólogos</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Coaches")">Entrenadores</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Machines")">Máquinas</a></li>
+                        }
+                    </ul>
+                    <span class="navbar-text">
+                        @Html.Partial("_LoginPartial")
+                    </span>
+                </div>
             </nav><!-- .nav-menu -->
         </div>
     </header><!-- End Header -->

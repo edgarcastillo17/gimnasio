@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -9,6 +10,11 @@ namespace Gimnasio.Web.Models
     // Para agregar datos de perfil del usuario, agregue más propiedades a su clase ApplicationUser. Visite https://go.microsoft.com/fwlink/?LinkID=317594 para obtener más información.
     public class ApplicationUser : IdentityUser
     {
+        [Display(Name = "Nombre")]
+        public string FirstName { get; set; }
+        [Display(Name = "Apellidos")]
+        public string LastName { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Tenga en cuenta que el valor de authenticationType debe coincidir con el definido en CookieAuthenticationOptions.AuthenticationType
@@ -29,5 +35,11 @@ namespace Gimnasio.Web.Models
         {
             return new ApplicationDbContext();
         }
-    }
+
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Coach> Coaches { get; set; }
+        public DbSet<Nutritionist> Nutritionists { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Machine> Machines { get; set; }
+}
 }
