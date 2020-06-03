@@ -6,7 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Gimnasio.Web.Class;
 using Gimnasio.Web.Models;
+using Gimnasio.Web.Models.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Gimnasio.Web.Controllers
 {
@@ -17,7 +21,8 @@ namespace Gimnasio.Web.Controllers
         // GET: Coaches
         public ActionResult Index()
         {
-            return View(db.Coaches.ToList());
+            var coach = db.Coaches.Include(n => n.ApplicationUser).ToList();
+            return View(coach);
         }
 
         // GET: Coaches/Details/5
@@ -46,16 +51,38 @@ namespace Gimnasio.Web.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Age,Specialty,Image")] Coach coach)
+        public ActionResult Create(CoachViewModel cvm, HttpPostedFileBase cimage)
         {
             if (ModelState.IsValid)
             {
+                Utilities.CreateUserASP(cvm.Email, cvm.Password, "Coach");
+                var coachdb = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                var usercoach = coachdb.FindByName(cvm.Email);
+
+                if (cimage != null)
+                {
+                    var perfil = System.IO.Path.GetFileName(cimage.FileName);
+                    var direccion = "~/Images/Coaches/" + cvm.Email + "_" + perfil;
+                    cimage.SaveAs(Server.MapPath(direccion));
+                    cvm.Image = cvm.Email + "_" + perfil;
+                }
+
+                var coach = new Coach
+                {
+                    FirstName = cvm.FirstName,
+                    LastName = cvm.LastName,
+                    Age = cvm.Age,
+                    Specialty = cvm.Specialty,
+                    Image = cvm.Image,
+                    UserId = usercoach.Id
+                };
+
                 db.Coaches.Add(coach);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(coach);
+            return View(cvm);
         }
 
         // GET: Coaches/Edit/5

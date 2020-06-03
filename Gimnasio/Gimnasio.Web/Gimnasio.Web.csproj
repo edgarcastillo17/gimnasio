@@ -188,6 +188,14 @@
     <Compile Include="Migrations\202006021931097_UserId_Coah_Nutri.Designer.cs">
       <DependentUpon>202006021931097_UserId_Coah_Nutri.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006031731590_UserId_Client.cs" />
+    <Compile Include="Migrations\202006031731590_UserId_Client.Designer.cs">
+      <DependentUpon>202006031731590_UserId_Client.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006032249071_Update_Nutri_Coach.cs" />
+    <Compile Include="Migrations\202006032249071_Update_Nutri_Coach.Designer.cs">
+      <DependentUpon>202006032249071_Update_Nutri_Coach.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
@@ -197,6 +205,9 @@
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Nutritionist.cs" />
+    <Compile Include="Models\ViewModels\ClientViewModel.cs" />
+    <Compile Include="Models\ViewModels\CoachViewModel.cs" />
+    <Compile Include="Models\ViewModels\NutritionistViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -384,17 +395,13 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Coaches\Create.cshtml" />
     <Content Include="Views\Coaches\Delete.cshtml" />
     <Content Include="Views\Coaches\Details.cshtml" />
     <Content Include="Views\Coaches\Edit.cshtml" />
     <Content Include="Views\Coaches\Index.cshtml" />
-    <Content Include="Views\Nutritionists\Create.cshtml" />
     <Content Include="Views\Nutritionists\Delete.cshtml" />
     <Content Include="Views\Nutritionists\Details.cshtml" />
-    <Content Include="Views\Nutritionists\Edit.cshtml" />
     <Content Include="Views\Nutritionists\Index.cshtml" />
-    <Content Include="Views\Clients\Create.cshtml" />
     <Content Include="Views\Clients\Delete.cshtml" />
     <Content Include="Views\Clients\Details.cshtml" />
     <Content Include="Views\Clients\Edit.cshtml" />
@@ -405,9 +412,18 @@
     <Content Include="Views\Machines\Edit.cshtml" />
     <Content Include="Views\Machines\Index.cshtml" />
     <Content Include="Views\Clients\AllClients.cshtml" />
+    <Content Include="Views\Nutritionists\Create.cshtml" />
+    <Content Include="Views\Clients\Create.cshtml" />
+    <Content Include="Views\Coaches\Create.cshtml" />
+    <Content Include="Views\Nutritionists\Edit.cshtml" />
+    <Content Include="Views\Clients\ClientByNutritionist.cshtml" />
+    <Content Include="Views\Clients\ClientByCoach.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Coaches\" />
+    <Folder Include="Images\Machines\" />
+    <Folder Include="Images\Nutritionists\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -432,6 +448,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006021931097_UserId_Coah_Nutri.resx">
       <DependentUpon>202006021931097_UserId_Coah_Nutri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006031731590_UserId_Client.resx">
+      <DependentUpon>202006031731590_UserId_Client.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006032249071_Update_Nutri_Coach.resx">
+      <DependentUpon>202006032249071_Update_Nutri_Coach.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

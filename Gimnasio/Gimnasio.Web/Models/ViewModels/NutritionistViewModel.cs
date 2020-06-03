@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace Gimnasio.Web.Models
+namespace Gimnasio.Web.Models.ViewModels
 {
-    public class Nutritionist
+    public class NutritionistViewModel
     {
-        public int Id { get; set; }
         [Display(Name = "Nombre")]
         public string FirstName { get; set; }
         [Display(Name = "Apellidos")]
         public string LastName { get; set; }
-        [Required]
         [Display(Name = "Edad")]
         public int Age { get; set; }
-        [Required]
-        [Display(Name = "Imagen")]
+        [Display(Name = "Correo")]
+        public string Email { get; set; }
+        [Display(Name = "Contraseña")]
+        public string Password { get; set; }
+        [Display(Name = "Foto")]
         public string Image { get; set; }
-        public string UserId { get; set; }
-        [ForeignKey("UserId")]
-        public ApplicationUser ApplicationUser { get; set; }
-        public ICollection<Client> Clients { get; set; }
     }
 }

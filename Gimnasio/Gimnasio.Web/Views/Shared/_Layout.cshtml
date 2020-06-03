@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Day Bootstrap Template - Index</title>
+    <title>Unmir</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
@@ -78,9 +78,14 @@
                             <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Machines")">Máquinas</a></li>
                         }
 
-                        @if (User.IsInRole("Nutritionist") || User.IsInRole("Coach"))
+                        @if (User.IsInRole("Coach"))
                         {
-                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Clients")">Clientes</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("ClientByCoach","Clients")">Clientes</a></li>
+                        }
+
+                        @if (User.IsInRole("Nutritionist"))
+                        {
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("ClientByNutritionist","Clients")">Clientes</a></li>
                         }
 
                         @if (User.IsInRole("Client"))

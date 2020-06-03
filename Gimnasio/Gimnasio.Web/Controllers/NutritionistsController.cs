@@ -6,7 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Gimnasio.Web.Class;
 using Gimnasio.Web.Models;
+using Gimnasio.Web.Models.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Gimnasio.Web.Controllers
 {
@@ -17,7 +21,8 @@ namespace Gimnasio.Web.Controllers
         // GET: Nutritionists
         public ActionResult Index()
         {
-            return View(db.Nutritionists.ToList());
+            var nutri = db.Nutritionists.Include(n => n.ApplicationUser).ToList();
+            return View(nutri);
         }
 
         // GET: Nutritionists/Details/5
@@ -46,16 +51,37 @@ namespace Gimnasio.Web.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Age,Image")] Nutritionist nutritionist)
+        public ActionResult Create(NutritionistViewModel nvm, HttpPostedFileBase nimage)
         {
             if (ModelState.IsValid)
             {
-                db.Nutritionists.Add(nutritionist);
+                Utilities.CreateUserASP(nvm.Email, nvm.Password, "Nutritionist");
+                var nutridb = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                var usernutri = nutridb.FindByName(nvm.Email);
+
+                if (nimage != null)
+                {
+                    var perfil = System.IO.Path.GetFileName(nimage.FileName);
+                    var direccion = "~/Images/Nutritionists/" + nvm.Email + "_" + perfil;
+                    nimage.SaveAs(Server.MapPath(direccion));
+                    nvm.Image = nvm.Email + "_" + perfil;
+                }
+
+                var nutri = new Nutritionist
+                {
+                    FirstName = nvm.FirstName,
+                    LastName = nvm.LastName,
+                    Age = nvm.Age,
+                    Image = nvm.Image,
+                    UserId = usernutri.Id
+                };
+
+                db.Nutritionists.Add(nutri);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(nutritionist);
+            return View(nvm);
         }
 
         // GET: Nutritionists/Edit/5

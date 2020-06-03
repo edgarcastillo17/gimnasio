@@ -46,10 +46,18 @@ namespace Gimnasio.Web.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Type,Brand,Purchase,Image")] Machine machine)
+        public ActionResult Create(Machine machine, HttpPostedFileBase mimage)
         {
             if (ModelState.IsValid)
             {
+                if (mimage != null)
+                {
+                    var perfil = System.IO.Path.GetFileName(mimage.FileName);
+                    var direccion = "~/Images/Machines/" + machine.Id + "_" + perfil;
+                    mimage.SaveAs(Server.MapPath(direccion));
+                    machine.Image = machine.Id + "_" + perfil;
+                }
+
                 db.Machines.Add(machine);
                 db.SaveChanges();
                 return RedirectToAction("Index");

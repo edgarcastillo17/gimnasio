@@ -6,8 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Gimnasio.Web.Class;
 using Gimnasio.Web.Models;
+using Gimnasio.Web.Models.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Gimnasio.Web.Controllers
 {
@@ -64,8 +67,8 @@ namespace Gimnasio.Web.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
-            ViewBag.CoachId = new SelectList(db.Coaches, "Id", "Specialty");
-            ViewBag.NutritionistId = new SelectList(db.Nutritionists, "Id", "Image");
+            ViewBag.CoachId = new SelectList(db.Coaches, "Id", "FirstName");
+            ViewBag.NutritionistId = new SelectList(db.Nutritionists, "Id", "FirstName");
             return View();
         }
 
@@ -74,18 +77,35 @@ namespace Gimnasio.Web.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Age,Type,Admission,CoachId,NutritionistId")] Client client)
+        public ActionResult Create(ClientViewModel cvm)
         {
             if (ModelState.IsValid)
             {
+                Utilities.CreateUserASP(cvm.Email, cvm.Password, "Client");
+                var clientdb = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                var userclient = clientdb.FindByName(cvm.Email);
+
+                var client = new Client
+                {
+                    Age = cvm.Age,
+                    Type = cvm.Type,
+                    Admission = cvm.Admission,
+                    UserId = userclient.Id
+                };
+
+                ViewBag.CoachId = new SelectList(db.Coaches, "Id", "FirstName", cvm.CoachId);
+                ViewBag.NutritionistId = new SelectList(db.Nutritionists, "Id", "FirstName", cvm.NutritionistId);
+
+                client.CoachId = cvm.CoachId;
+                client.NutritionistId = cvm.NutritionistId;
+
                 db.Clients.Add(client);
                 db.SaveChanges();
+                
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CoachId = new SelectList(db.Coaches, "Id", "Specialty", client.CoachId);
-            ViewBag.NutritionistId = new SelectList(db.Nutritionists, "Id", "Image", client.NutritionistId);
-            return View(client);
+            return View(cvm);
         }
 
         // GET: Clients/Edit/5

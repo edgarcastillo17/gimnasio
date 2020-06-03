@@ -41,5 +41,5 @@ namespace Gimnasio.Web.Models
         public DbSet<Nutritionist> Nutritionists { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Machine> Machines { get; set; }
-}
+    }
 }

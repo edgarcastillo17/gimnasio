@@ -25,6 +25,8 @@ namespace Gimnasio.Web.Models
         public int NutritionistId { get; set; }
         [ForeignKey("NutritionistId")]
         public Nutritionist Nutritionist { get; set; }
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
         public ApplicationUser ApplicationUser { get; set; }
     }
 }

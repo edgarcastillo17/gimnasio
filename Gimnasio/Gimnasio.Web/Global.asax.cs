@@ -24,6 +24,9 @@ namespace Gimnasio.Web
         private void CheckRoles()
         {
             Utilities.CheckRoles("Admin");
+            Utilities.CheckRoles("Coach");
+            Utilities.CheckRoles("Nutritionist");
+            Utilities.CheckRoles("Client");
         }
     }
 }
