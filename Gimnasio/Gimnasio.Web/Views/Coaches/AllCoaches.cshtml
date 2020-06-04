@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Gimnasio.Web.Models.Client>
+﻿@model IEnumerable<Gimnasio.Web.Models.Coach>
 
 <div style="margin-top:100px;padding:50px;">
-    <h2 class="text-center display-4">Clientes</h2>
+    <h2 class="text-center display-4">Entrenadores</h2>
     <br />
 
-    <a href="@Url.Action("Create","Clients")" class="btn btn-sm btn-dark">
+    <a href="@Url.Action("Create","Coaches")" class="btn btn-sm btn-dark">
         <span class="text-white-50"><i class='bx bx-user-plus'></i></span>
         <span class="text-white"> Añadir</span>
     </a>
@@ -12,23 +12,23 @@
     <br />
     <br />
 
-    <table class="table" id="clients">
-        <thead>
+    <table class="table table-striped text-center" id="clients">
+        <thead class="thead-dark">
             <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Apellidos
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Age)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Type)
+                    @Html.DisplayNameFor(model => model.Specialty)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Admission)
-                </th>
-                <th>
-                    Entrenador
-                </th>
-                <th>
-                    Nutriólogo
+                    Correo
                 </th>
                 <th></th>
             </tr>
@@ -37,28 +37,32 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Age)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Admission)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Coach.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nutritionist.Id)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Specialty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+                </td>
+
+                <td>
+                    <a href="@Url.Action("Edit","Coaches",new { id = item.Id })" class="btn btn-sm btn-primary">
+                        <i class='bx bx-edit-alt'></i>
+                    </a>
+                    <a href="@Url.Action("Delete","Coaches",new { id = item.Id })" class="btn btn-sm btn-danger">
+                        <i class='bx bx-trash'></i>
+                    </a>
+                </td>
+            </tr>
             }
         </tbody>
 

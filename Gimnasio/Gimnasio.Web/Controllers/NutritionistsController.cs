@@ -18,6 +18,13 @@ namespace Gimnasio.Web.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult AllNutritionists()
+        {
+            var nutritionists = db.Nutritionists.Include(c => c.ApplicationUser);
+            return View(nutritionists);
+        }
+
         // GET: Nutritionists
         public ActionResult Index()
         {
@@ -40,6 +47,7 @@ namespace Gimnasio.Web.Controllers
             return View(nutritionist);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Nutritionists/Create
         public ActionResult Create()
         {
@@ -78,12 +86,13 @@ namespace Gimnasio.Web.Controllers
 
                 db.Nutritionists.Add(nutri);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AllNutritionists");
             }
 
             return View(nvm);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Nutritionists/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -110,11 +119,12 @@ namespace Gimnasio.Web.Controllers
             {
                 db.Entry(nutritionist).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AllNutritionists");
             }
             return View(nutritionist);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Nutritionists/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -138,7 +148,7 @@ namespace Gimnasio.Web.Controllers
             Nutritionist nutritionist = db.Nutritionists.Find(id);
             db.Nutritionists.Remove(nutritionist);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AllNutritionists");
         }
 
         protected override void Dispose(bool disposing)

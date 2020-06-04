@@ -24,7 +24,6 @@
 
 <body>
 
-    <!-- ======= Top Bar ======= -->
     <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top bg-dark">
         <div class="container d-flex">
             <div class="contact-info mr-auto">
@@ -41,13 +40,10 @@
         </div>
     </div>
 
-    <!-- ======= Header ======= -->
     <header id="header" class="fixed-top bg-dark">
         <div class="container d-flex align-items-center">
 
             <h1 class="logo mr-auto"><a href="@Url.Action("Index","Home")">Unmir</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
             <nav class="navbar navbar-expand-lg bg-dark">
                 <div class="collapse navbar-collapse">
@@ -68,13 +64,14 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("AllClients","Clients")">Clientes</a></li>
-                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Coaches")">Entrenadores</a></li>
-                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Nutritionists")">Nutriólogos</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("AllCoaches","Coaches")">Entrenadores</a></li>
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("AllNutritionists","Nutritionists")">Nutriólogos</a></li>
                             <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Machines")">Máquinas</a></li>
                         }
 
                         @if (User.IsInRole("Coach"))
                         {
+                            <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Machines")">Máquinas</a></li>
                             <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("ClientByCoach","Clients")">Clientes</a></li>
                         }
 
@@ -94,27 +91,25 @@
                         @Html.Partial("_LoginPartial")
                     </span>
                 </div>
-            </nav><!-- .nav-menu -->
+            </nav>
         </div>
-    </header><!-- End Header -->
+    </header>
 
     <div>
         @RenderBody()
     </div>
 
-    <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="container">
             <div class="copyright">
                 &copy; <strong><span>Castillo Medina</span></strong> y <strong><span>Villegas Ramírez</span></strong> 2020
             </div>
         </div>
-    </footer><!-- End Footer -->
+    </footer>
 
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
     <div id="preloader"></div>
 
-    <!-- Vendor JS Files -->
     <script src="~/Scripts/Theme/jquery.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/Theme/jquery.easing.min.js"></script>
@@ -123,8 +118,6 @@
     <script src="~/Scripts/Theme/venobox.min.js"></script>
     <script src="~/Scripts/Theme/owl.carousel.min.js"></script>
     <script src="~/Scripts/Theme/aos.js"></script>
-
-    <!-- Template Main JS File -->
     <script src="~/Scripts/Theme/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>

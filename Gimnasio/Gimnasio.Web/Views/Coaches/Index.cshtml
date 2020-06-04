@@ -2,12 +2,6 @@
 
     <div style="margin-top:100px;padding:50px;">
         <h2 class="text-center display-4">Entrenadores</h2>
-        <br />
-
-        <a href="@Url.Action("Create","Coaches")" class="btn btn-sm btn-dark">
-            <span class="text-white-50"><i class='bx bx-user-plus'></i></span>
-            <span class="text-white"> Añadir</span>
-        </a>
 
         <br />
         <br />
@@ -15,23 +9,13 @@
         <div class="row justify-content-center">
             @foreach (var item in Model)
             {
-                <div class="card shadow" style="width: 18rem; margin:1rem;">
-                    <img src="~/Images/Coaches/@item.Image" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title font-italic text-center">@item.FirstName @item.LastName</h5>
-                        <p class="card-text text-center">Especialidad: @item.Specialty</p>
-                    </div>
-                    <div class="card-body text-center">
-                        <a href="@Url.Action("Edit","Coaches", new { id = item.Id})" class="btn btn-sm btn-primary">
-                            <span class="text-white-50"><i class='bx bx-edit-alt'></i></span>
-                            <span class="text-white"> Editar</span>
-                        </a>
-                        <a href="@Url.Action("Delete","Coaches", new { id = item.Id})" class="btn btn-sm btn-danger">
-                            <span class="text-white-50"><i class='bx bx-trash'></i></span>
-                            <span class="text-white"> Eliminar</span>
-                        </a>
-                    </div>
+            <div class="card shadow" style="width: 18rem; margin:1rem;">
+                <img src="~/Images/Coaches/@item.Image" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title font-italic text-center">@item.FirstName @item.LastName</h5>
+                    <p class="card-text text-center">Especialidad: @item.Specialty</p>
                 </div>
+            </div>
             }
         </div>
     </div>

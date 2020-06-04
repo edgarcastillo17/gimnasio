@@ -18,6 +18,13 @@ namespace Gimnasio.Web.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult AllCoaches()
+        {
+            var coaches = db.Coaches.Include(c => c.ApplicationUser);
+            return View(coaches);
+        }
+
         // GET: Coaches
         public ActionResult Index()
         {
@@ -40,6 +47,7 @@ namespace Gimnasio.Web.Controllers
             return View(coach);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Coaches/Create
         public ActionResult Create()
         {
@@ -79,12 +87,13 @@ namespace Gimnasio.Web.Controllers
 
                 db.Coaches.Add(coach);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AllCoaches");
             }
 
             return View(cvm);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Coaches/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -111,11 +120,12 @@ namespace Gimnasio.Web.Controllers
             {
                 db.Entry(coach).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AllCoaches");
             }
             return View(coach);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Coaches/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -139,7 +149,7 @@ namespace Gimnasio.Web.Controllers
             Coach coach = db.Coaches.Find(id);
             db.Coaches.Remove(coach);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AllCoaches");
         }
 
         protected override void Dispose(bool disposing)

@@ -7,19 +7,19 @@
                 <div class="card-body">
                     <dl class="dl-horizontal">
                         <dt>
-                            @Html.DisplayNameFor(model => model.Coach.Specialty)
+                            @Html.DisplayNameFor(model => model.FirstName)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Coach.Specialty)
+                            @Html.DisplayFor(model => model.FirstName)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.Nutritionist.Image)
+                            @Html.DisplayNameFor(model => model.LastName)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Nutritionist.Image)
+                            @Html.DisplayFor(model => model.LastName)
                         </dd>
 
                         <dt>
@@ -43,7 +43,7 @@
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Admission)
+                            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Admission))
                         </dd>
 
                     </dl>
@@ -52,9 +52,15 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Delete" class="btn btn-default" /> |
-                            @Html.ActionLink("Back to List", "Index")
+                        <div class="text-center" style="margin:0.5rem;">
+                            <button class="btn btn-sm btn-danger">
+                                <span class="text-white-50"><i class="bx bx-trash"></i></span>
+                                <span class="text-white"> Eliminar</span>
+                            </button>
+                            <a href="@Url.Action("AllClients","Clients")" class="btn btn-sm btn-dark">
+                                <span class="text-white-50"><i class='bx bx-left-arrow-alt'></i></span>
+                                <span class="text-white"> Regresar</span>
+                            </a>
                         </div>
                     }
                 </div>

@@ -385,12 +385,7 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -410,7 +405,6 @@
     <Content Include="Views\Nutritionists\Index.cshtml" />
     <Content Include="Views\Clients\Delete.cshtml" />
     <Content Include="Views\Clients\Edit.cshtml" />
-    <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Machines\Create.cshtml" />
     <Content Include="Views\Machines\Delete.cshtml" />
     <Content Include="Views\Machines\Edit.cshtml" />
@@ -422,6 +416,8 @@
     <Content Include="Views\Nutritionists\Edit.cshtml" />
     <Content Include="Views\Clients\ClientByNutritionist.cshtml" />
     <Content Include="Views\Clients\ClientByCoach.cshtml" />
+    <Content Include="Views\Nutritionists\AllNutritionists.cshtml" />
+    <Content Include="Views\Coaches\AllCoaches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

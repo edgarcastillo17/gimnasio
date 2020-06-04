@@ -12,8 +12,8 @@
         <br />
         <br />
 
-        <table class="table" id="clients">
-            <thead>
+        <table class="table table-striped text-center" id="clients">
+            <thead class="thead-dark">
                 <tr>
                     <th>
                         Nombre
@@ -63,18 +63,41 @@
                         @Html.DisplayFor(modelItem => item.Type)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Admission)
+                        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Admission))
                     </td>
+                    @if (item.CoachId == null)
+                    {
+                        <td>
+                            Ninguno
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Coach.Id)
+                        </td>
+                    }
+
+                    @if (item.NutritionistId == null)
+                    {
+                        <td>
+                            Ninguno
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nutritionist.Id)
+                        </td>
+                    }
+                    
                     <td>
-                        @Html.DisplayFor(modelItem => item.Coach.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nutritionist.Id)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        <a href="@Url.Action("Edit","Clients",new { id = item.Id })" class="btn btn-sm btn-primary">
+                            <i class='bx bx-edit-alt'></i>
+                        </a>
+                        <a href="@Url.Action("Delete","Clients",new { id = item.Id })" class="btn btn-sm btn-danger">
+                            <i class='bx bx-trash'></i>
+                        </a>
                     </td>
                 </tr>
                 }

@@ -18,12 +18,14 @@ namespace Gimnasio.Web.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize(Roles = "Admin")]
         public ActionResult AllClients()
         {
             var clients = db.Clients.Include(c => c.Coach).Include(c => c.Nutritionist).Include(c => c.ApplicationUser);
             return View(clients);
         }
 
+        [Authorize(Roles = "Coach")]
         public ActionResult ClientByCoach()
         {
             var user = User.Identity.GetUserId();
@@ -33,6 +35,7 @@ namespace Gimnasio.Web.Controllers
             return View(clients);
         }
 
+        [Authorize(Roles = "Nutritionist")]
         public ActionResult ClientByNutritionist()
         {
             var user = User.Identity.GetUserId();
@@ -64,6 +67,7 @@ namespace Gimnasio.Web.Controllers
             return View(client);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Clients/Create
         public ActionResult Create()
         {
@@ -114,6 +118,7 @@ namespace Gimnasio.Web.Controllers
             return View(cvm);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Clients/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -126,8 +131,13 @@ namespace Gimnasio.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CoachId = new SelectList(db.Coaches, "Id", "Specialty", client.CoachId);
-            ViewBag.NutritionistId = new SelectList(db.Nutritionists, "Id", "Image", client.NutritionistId);
+
+            ViewBag.Coaches = (from c in db.Coaches
+                               select c).ToList();
+            ViewBag.Nutritionists = (from c in db.Nutritionists
+                                     select c).ToList();
+            ViewBag.CoachId = new SelectList(db.Coaches, "Id", "FirstName");
+            ViewBag.NutritionistId = new SelectList(db.Nutritionists, "Id", "FirstName");
             return View(client);
         }
 
@@ -142,13 +152,14 @@ namespace Gimnasio.Web.Controllers
             {
                 db.Entry(client).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AllClients");
             }
-            ViewBag.CoachId = new SelectList(db.Coaches, "Id", "Specialty", client.CoachId);
-            ViewBag.NutritionistId = new SelectList(db.Nutritionists, "Id", "Image", client.NutritionistId);
+            ViewBag.CoachId = new SelectList(db.Coaches, "Id", "FirstName", client.CoachId);
+            ViewBag.NutritionistId = new SelectList(db.Nutritionists, "Id", "FirstName", client.NutritionistId);
             return View(client);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -172,7 +183,7 @@ namespace Gimnasio.Web.Controllers
             Client client = db.Clients.Find(id);
             db.Clients.Remove(client);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AllClients");
         }
 
         protected override void Dispose(bool disposing)
