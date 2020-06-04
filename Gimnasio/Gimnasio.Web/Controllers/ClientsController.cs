@@ -20,7 +20,7 @@ namespace Gimnasio.Web.Controllers
 
         public ActionResult AllClients()
         {
-            var clients = db.Clients.Include(c => c.Coach).Include(n => n.Nutritionist).ToList();
+            var clients = db.Clients.Include(c => c.Coach).Include(c => c.Nutritionist).Include(c => c.ApplicationUser);
             return View(clients);
         }
 
@@ -45,7 +45,7 @@ namespace Gimnasio.Web.Controllers
         // GET: Clients
         public ActionResult Index()
         {
-            var clients = db.Clients.Include(c => c.Coach).Include(c => c.Nutritionist);
+            var clients = db.Clients.Include(c => c.Coach).Include(c => c.Nutritionist).Include(c => c.ApplicationUser);
             return View(clients.ToList());
         }
 
@@ -67,6 +67,10 @@ namespace Gimnasio.Web.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
+            ViewBag.Coaches = (from c in db.Coaches
+                                select c).ToList();
+            ViewBag.Nutritionists = (from c in db.Nutritionists
+                                select c).ToList();
             ViewBag.CoachId = new SelectList(db.Coaches, "Id", "FirstName");
             ViewBag.NutritionistId = new SelectList(db.Nutritionists, "Id", "FirstName");
             return View();
@@ -87,6 +91,8 @@ namespace Gimnasio.Web.Controllers
 
                 var client = new Client
                 {
+                    FirstName = cvm.FirstName,
+                    LastName = cvm.LastName,
                     Age = cvm.Age,
                     Type = cvm.Type,
                     Admission = cvm.Admission,
@@ -102,7 +108,7 @@ namespace Gimnasio.Web.Controllers
                 db.Clients.Add(client);
                 db.SaveChanges();
                 
-                return RedirectToAction("Index");
+                return RedirectToAction("AllClients");
             }
 
             return View(cvm);
@@ -130,7 +136,7 @@ namespace Gimnasio.Web.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Age,Type,Admission,CoachId,NutritionistId")] Client client)
+        public ActionResult Edit(Client client)
         {
             if (ModelState.IsValid)
             {

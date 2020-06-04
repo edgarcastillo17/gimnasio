@@ -11,6 +11,12 @@ namespace Gimnasio.Web.Models
     {
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Nombre")]
+        public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Apellidos")]
+        public string LastName { get; set; }
+        [Required]
         [Display(Name = "Edad")]
         public int Age { get; set; }
         [Required]
@@ -19,10 +25,10 @@ namespace Gimnasio.Web.Models
         [Required]
         [Display(Name = "Fecha de Ingreso")]
         public DateTime Admission { get; set; }
-        public int CoachId { get; set; }
+        public int? CoachId { get; set; }
         [ForeignKey("CoachId")]
         public Coach Coach { get; set; }
-        public int NutritionistId { get; set; }
+        public int? NutritionistId { get; set; }
         [ForeignKey("NutritionistId")]
         public Nutritionist Nutritionist { get; set; }
         public string UserId { get; set; }

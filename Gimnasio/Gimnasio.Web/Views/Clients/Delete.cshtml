@@ -1,64 +1,63 @@
 ﻿@model Gimnasio.Web.Models.Client
 
-@{
-    ViewBag.Title = "Delete";
-}
+    <div style="margin-top:100px;padding:50px;">
+        <div class="row justify-content-center">
+            <div class="card" style="width:25rem; margin:1rem;">
+                <div class="card-header text-center bg-danger text-white">¿Seguro que deseas eliminar?</div>
+                <div class="card-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Coach.Specialty)
+                        </dt>
 
-<h2>Delete</h2>
+                        <dd>
+                            @Html.DisplayFor(model => model.Coach.Specialty)
+                        </dd>
 
-<h3>Are you sure you want to delete this?</h3>
-<div style="margin-top:50px;padding:50px;">
-    <h4>Client</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Coach.Specialty)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nutritionist.Image)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Coach.Specialty)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Nutritionist.Image)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nutritionist.Image)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Age)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nutritionist.Image)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Age)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Type)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Type)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Admission)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Admission)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Admission)
-        </dt>
+                    </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.Admission)
-        </dd>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-default" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-    }
-</div>
+    </div>

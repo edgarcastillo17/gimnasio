@@ -105,7 +105,7 @@ namespace Gimnasio.Web.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Age,Specialty,Image")] Coach coach)
+        public ActionResult Edit(Coach coach)
         {
             if (ModelState.IsValid)
             {

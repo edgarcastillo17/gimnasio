@@ -1,23 +1,20 @@
 ﻿@model IEnumerable<Gimnasio.Web.Models.Client>
 
-@{
-    ViewBag.Title = "Index";
-}
+<div style="margin-top:100px;padding:50px;">
+    <h2 class="text-center display-4">Clientes</h2>
+    <br />
 
-    <div style="margin-top:50px;padding:50px;">
-        <h2>Index</h2>
+    <a href="@Url.Action("Create","Clients")" class="btn btn-sm btn-dark">
+        <span class="text-white-50"><i class='bx bx-user-plus'></i></span>
+        <span class="text-white"> Añadir</span>
+    </a>
 
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table">
+    <br />
+    <br />
+
+    <table class="table" id="clients">
+        <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Coach.Specialty)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nutritionist.Image)
-                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Age)
                 </th>
@@ -27,18 +24,20 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Admission)
                 </th>
+                <th>
+                    Entrenador
+                </th>
+                <th>
+                    Nutriólogo
+                </th>
                 <th></th>
             </tr>
+        </thead>
 
+        <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Coach.Specialty)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nutritionist.Image)
-                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Age)
                     </td>
@@ -49,13 +48,54 @@
                         @Html.DisplayFor(modelItem => item.Admission)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.Coach.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nutritionist.Id)
+                    </td>
+                    <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                         @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     </td>
                 </tr>
             }
+        </tbody>
 
-        </table>
-    </div>
+    </table>
+</div>
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $('#clients').DataTable({
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+    </script>
+}

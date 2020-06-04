@@ -23,8 +23,8 @@ namespace Gimnasio.Web.Models.ViewModels
         [Display(Name = "Fecha de Ingreso")]
         public DateTime Admission { get; set; }
         [Display(Name = "Entrenador")]
-        public int CoachId { get; set; }
+        public int? CoachId { get; set; }
         [Display(Name = "Nutriólogo")]
-        public int NutritionistId { get; set; }
+        public int? NutritionistId { get; set; }
     }
 }

@@ -196,6 +196,14 @@
     <Compile Include="Migrations\202006032249071_Update_Nutri_Coach.Designer.cs">
       <DependentUpon>202006032249071_Update_Nutri_Coach.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006041733124_NullableForeignClient.cs" />
+    <Compile Include="Migrations\202006041733124_NullableForeignClient.Designer.cs">
+      <DependentUpon>202006041733124_NullableForeignClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006041757499_UpdateClients.cs" />
+    <Compile Include="Migrations\202006041757499_UpdateClients.Designer.cs">
+      <DependentUpon>202006041757499_UpdateClients.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
@@ -396,19 +404,15 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Coaches\Delete.cshtml" />
-    <Content Include="Views\Coaches\Details.cshtml" />
     <Content Include="Views\Coaches\Edit.cshtml" />
     <Content Include="Views\Coaches\Index.cshtml" />
     <Content Include="Views\Nutritionists\Delete.cshtml" />
-    <Content Include="Views\Nutritionists\Details.cshtml" />
     <Content Include="Views\Nutritionists\Index.cshtml" />
     <Content Include="Views\Clients\Delete.cshtml" />
-    <Content Include="Views\Clients\Details.cshtml" />
     <Content Include="Views\Clients\Edit.cshtml" />
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Machines\Create.cshtml" />
     <Content Include="Views\Machines\Delete.cshtml" />
-    <Content Include="Views\Machines\Details.cshtml" />
     <Content Include="Views\Machines\Edit.cshtml" />
     <Content Include="Views\Machines\Index.cshtml" />
     <Content Include="Views\Clients\AllClients.cshtml" />
@@ -454,6 +458,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006032249071_Update_Nutri_Coach.resx">
       <DependentUpon>202006032249071_Update_Nutri_Coach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006041733124_NullableForeignClient.resx">
+      <DependentUpon>202006041733124_NullableForeignClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006041757499_UpdateClients.resx">
+      <DependentUpon>202006041757499_UpdateClients.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
