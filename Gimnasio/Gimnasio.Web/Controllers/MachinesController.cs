@@ -14,6 +14,11 @@ namespace Gimnasio.Web.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult AllMachines()
+        {
+            return View(db.Machines.ToList());
+        }
         // GET: Machines
         public ActionResult Index()
         {
@@ -35,6 +40,8 @@ namespace Gimnasio.Web.Controllers
             return View(machine);
         }
 
+        [Authorize(Roles = "Admin")]
+
         // GET: Machines/Create
         public ActionResult Create()
         {
@@ -48,23 +55,24 @@ namespace Gimnasio.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Machine machine, HttpPostedFileBase eimage)
         {
-            if (ModelState.IsValid)
+            try
             {
-                if (eimage != null)
-                {
-                    var perfil = System.IO.Path.GetFileName(eimage.FileName);
-                    var direccion = "~/Images/Machines/" + machine.Id + "_" + perfil;
-                    eimage.SaveAs(Server.MapPath(direccion));
-                    machine.Image = machine.Id + "_" + perfil;
-                }
+                var perfil = System.IO.Path.GetFileName(eimage.FileName);
+                var direccion = "~/Images/Machines/" + machine.Id + "_" + perfil;
+                eimage.SaveAs(Server.MapPath(direccion));
+                machine.Image = machine.Id + "_" + perfil;
 
                 db.Machines.Add(machine);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(machine);
+            catch (Exception)
+            {
+                return View(machine);
+            }
         }
+
+        [Authorize(Roles = "Admin")]
 
         // GET: Machines/Edit/5
         public ActionResult Edit(int? id)
@@ -97,6 +105,7 @@ namespace Gimnasio.Web.Controllers
             return View(machine);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Machines/Delete/5
         public ActionResult Delete(int? id)
         {

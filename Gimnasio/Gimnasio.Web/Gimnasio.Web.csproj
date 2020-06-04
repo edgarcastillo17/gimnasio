@@ -418,6 +418,7 @@
     <Content Include="Views\Clients\ClientByCoach.cshtml" />
     <Content Include="Views\Nutritionists\AllNutritionists.cshtml" />
     <Content Include="Views\Coaches\AllCoaches.cshtml" />
+    <Content Include="Views\Machines\AllMachines.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

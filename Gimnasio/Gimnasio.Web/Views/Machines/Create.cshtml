@@ -2,9 +2,9 @@
 
 <div style="margin-top:100px; padding:50px;">
     <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="card shadow" style="width:25rem; margin:1rem;">
-                <div class="card-header bg-primary text-white text-center">Añade una máquina</div>
+                <div class="card-header bg-dark text-white text-center">Añade una máquina</div>
                 <form action="@Url.Action("Create","Machines")" method="post" enctype="multipart/form-data">
                     @Html.AntiForgeryToken()
 
@@ -53,12 +53,12 @@
 
                             <div class="form-group text-center">
                                 <button class="btn btn-sm btn-primary">
-                                    <span class="text-white-50"><i class="fas fa-plus"></i></span>
+                                    <span class="text-white-50"><i class='bx bx-save'></i></span>
                                     <span class="text-white"> Guardar</span>
                                 </button>
 
-                                <a href="@Url.Action("Index","Machines")" class="btn btn-sm btn-dark">
-                                    <span class="text-white-50"><i class="fas fa-arrow-alt-circle-left"></i></span>
+                                <a href="@Url.Action("AllMachines","Machines")" class="btn btn-sm btn-dark">
+                                    <span class="text-white-50"><i class="bx bx-left-arrow-alt"></i></span>
                                     <span class="text-white"> Regresar</span>
                                 </a>
                             </div>

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Gimnasio.Web.Models.Nutritionist>
+﻿@model IEnumerable<Gimnasio.Web.Models.Machine>
 
 <div style="margin-top:100px;padding:50px;">
-    <h2 class="text-center display-4">Nutriólogos</h2>
+    <h2 class="text-center display-4">Máquinas de Ejercicio</h2>
     <br />
 
-    <a href="@Url.Action("Create","Nutritionists")" class="btn btn-sm btn-dark">
+    <a href="@Url.Action("Create","Machines")" class="btn btn-sm btn-dark">
         <span class="text-white-50"><i class='bx bx-user-plus'></i></span>
         <span class="text-white"> Añadir</span>
     </a>
@@ -12,20 +12,17 @@
     <br />
     <br />
 
-    <table class="table table-striped text-center" id="nutris">
+    <table class="table table-striped text-center" id="machines">
         <thead class="thead-dark">
             <tr>
                 <th>
-                    Nombre
+                    @Html.DisplayNameFor(model => model.Type)
                 </th>
                 <th>
-                    Apellidos
+                    @Html.DisplayNameFor(model => model.Brand)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Age)
-                </th>
-                <th>
-                    Correo
+                    @Html.DisplayNameFor(model => model.Purchase)
                 </th>
                 <th></th>
             </tr>
@@ -36,23 +33,19 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
+                        @Html.DisplayFor(modelItem => item.Type)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
+                        @Html.DisplayFor(modelItem => item.Brand)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Age)
+                        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Purchase))
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
-                    </td>
-
-                    <td>
-                        <a href="@Url.Action("Edit","Nutritionists",new { id = item.Id })" class="btn btn-sm btn-primary">
+                        <a href="@Url.Action("Edit","Machines",new { id = item.Id })" class="btn btn-sm btn-primary">
                             <i class='bx bx-edit-alt'></i>
                         </a>
-                        <a href="@Url.Action("Delete","Nutritionists",new { id = item.Id })" class="btn btn-sm btn-danger">
+                        <a href="@Url.Action("Delete","Machines",new { id = item.Id })" class="btn btn-sm btn-danger">
                             <i class='bx bx-trash'></i>
                         </a>
                     </td>
@@ -68,7 +61,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#nutris').DataTable({
+            $('#machines').DataTable({
                 "language": {
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",
