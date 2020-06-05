@@ -57,6 +57,7 @@ namespace Gimnasio.Web.Controllers
         // POST: Coaches/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CoachViewModel cvm, HttpPostedFileBase cimage)
@@ -112,6 +113,7 @@ namespace Gimnasio.Web.Controllers
         // POST: Coaches/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Coach coach)
@@ -142,6 +144,7 @@ namespace Gimnasio.Web.Controllers
         }
 
         // POST: Coaches/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -51,6 +51,7 @@ namespace Gimnasio.Web.Controllers
         // POST: Machines/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Machine machine, HttpPostedFileBase eimage)
@@ -64,7 +65,7 @@ namespace Gimnasio.Web.Controllers
 
                 db.Machines.Add(machine);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AllMachines");
             }
             catch (Exception)
             {
@@ -92,17 +93,26 @@ namespace Gimnasio.Web.Controllers
         // POST: Machines/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Type,Brand,Purchase,Image")] Machine machine)
+        public ActionResult Edit(Machine machine, HttpPostedFileBase eimage)
         {
-            if (ModelState.IsValid)
+            try
             {
+                var perfil = System.IO.Path.GetFileName(eimage.FileName);
+                var direccion = "~/Images/Machines/" + machine.Id + "_" + perfil;
+                eimage.SaveAs(Server.MapPath(direccion));
+                machine.Image = machine.Id + "_" + perfil;
+
                 db.Entry(machine).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AllMachines");
             }
-            return View(machine);
+            catch (Exception)
+            {
+                return View(machine);
+            }
         }
 
         [Authorize(Roles = "Admin")]
@@ -122,6 +132,7 @@ namespace Gimnasio.Web.Controllers
         }
 
         // POST: Machines/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -129,7 +140,7 @@ namespace Gimnasio.Web.Controllers
             Machine machine = db.Machines.Find(id);
             db.Machines.Remove(machine);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AllMachines");
         }
 
         protected override void Dispose(bool disposing)

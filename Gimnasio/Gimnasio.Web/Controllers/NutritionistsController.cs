@@ -57,6 +57,7 @@ namespace Gimnasio.Web.Controllers
         // POST: Nutritionists/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(NutritionistViewModel nvm, HttpPostedFileBase nimage)
@@ -111,6 +112,7 @@ namespace Gimnasio.Web.Controllers
         // POST: Nutritionists/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Nutritionist nutritionist)
@@ -141,6 +143,7 @@ namespace Gimnasio.Web.Controllers
         }
 
         // POST: Nutritionists/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
