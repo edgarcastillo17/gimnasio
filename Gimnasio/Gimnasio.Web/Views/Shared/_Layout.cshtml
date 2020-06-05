@@ -43,7 +43,7 @@
                     </div>
                 </li>
 
-                @if (!User.Identity.IsAuthenticated)
+                @if (!User.Identity.IsAuthenticated || User.IsInRole("Client"))
                 {
                     <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Nutritionists")">Nutriólogos</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="@Url.Action("Index","Coaches")">Entrenadores</a></li>
